@@ -33,9 +33,6 @@
 			// Update model filter configuration
 			await updateModelFilterConfig(localStorage.token, whitelistEnabled, whitelistModels);
 
-			// Call the save handler
-			saveHandler();
-
 			// Get backend configuration and set it
 			await config.set(await getBackendConfig());
 			

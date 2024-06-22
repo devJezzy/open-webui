@@ -529,7 +529,7 @@ ENABLE_SIGNUP = PersistentConfig(
     ),
 )
 DEFAULT_MODELS = PersistentConfig(
-    "DEFAULT_MODELS", "ui.default_models", os.environ.get("DEFAULT_MODELS", None)
+    "DEFAULT_MODELS", "ui.default_models", os.environ.get("DEFAULT_MODELS", "mistral:latest")
 )
 
 DEFAULT_PROMPT_SUGGESTIONS = PersistentConfig(
