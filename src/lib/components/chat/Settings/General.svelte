@@ -202,6 +202,7 @@
 
 		<hr class=" dark:border-gray-850 my-3" />
 
+		{#if $user.role === 'admin'}
 		<div>
 			<div class=" my-2.5 text-sm font-medium">{$i18n.t('System Prompt')}</div>
 			<textarea
@@ -288,6 +289,7 @@
 				</div>
 			{/if}
 		</div>
+		{/if}
 	</div>
 
 	<div class="flex justify-end pt-3 text-sm font-medium">
