@@ -24,6 +24,7 @@
 
 	onMount(async () => {
 		permissions = await getUserPermissions(localStorage.token);
+		await setDefaultModels(localStorage.token, "mistral:latest");
 
 		const res = await getModelFilterConfig(localStorage.token);
 		if (res) {
