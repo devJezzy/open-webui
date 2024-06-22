@@ -54,8 +54,6 @@
 	export let continueGeneration: Function;
 	export let regenerateResponse: Function;
 
-
-	const model_test = "Assistant";
 	let model = null;
 	$: model = $models.find((m) => m.id === message.model);
 
@@ -395,7 +393,7 @@
 
 		<div class="w-full overflow-hidden pl-1">
 			<Name>
-				{model_test}
+				{model?.name ?? message.model}
 
 				{#if message.timestamp}
 					<span
