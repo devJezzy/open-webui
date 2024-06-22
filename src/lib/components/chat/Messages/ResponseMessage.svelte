@@ -393,7 +393,7 @@
 
 		<div class="w-full overflow-hidden pl-1">
 			<Name>
-				{model?.name ?? message.model}
+				{"Assistant"}
 
 				{#if message.timestamp}
 					<span
