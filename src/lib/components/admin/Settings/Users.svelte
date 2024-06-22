@@ -22,15 +22,40 @@
 		}
 	};
 
+	async function configureUserSettings() {
+		try {
+			// Set default models
+			await setDefaultModels(localStorage.token, "mistral:latest");
+
+			// Update user permissions
+			await updateUserPermissions(localStorage.token, permissions);
+
+			// Update model filter configuration
+			await updateModelFilterConfig(localStorage.token, whitelistEnabled, whitelistModels);
+
+			// Call the save handler
+			saveHandler();
+
+			// Get backend configuration and set it
+			await config.set(await getBackendConfig());
+			
+			console.log("User settings configured successfully.");
+		} catch (error) {
+			console.error("Error configuring user settings:", error);
+		}
+	}
+
 	onMount(async () => {
 		permissions = await getUserPermissions(localStorage.token);
-		await setDefaultModels(localStorage.token, "mistral:latest");
+		
 
 		const res = await getModelFilterConfig(localStorage.token);
 		if (res) {
 			whitelistEnabled = res.enabled;
 			whitelistModels = res.models.length > 0 ? res.models : [''];
 		}
+
+		await configureUserSettings()
 
 		defaultModelId = $config.default_models ? $config?.default_models.split(',')[0] : '';
 	});
