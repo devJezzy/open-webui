@@ -13,6 +13,7 @@ import shutil
 import os
 import inspect
 import asyncio
+from PyPDF2 import PdfReader
 
 from fastapi import FastAPI, Request, Depends, status, UploadFile, File, Form
 from fastapi.staticfiles import StaticFiles
@@ -324,6 +325,19 @@ class ChatCompletionMiddleware(BaseHTTPMiddleware):
 
             prompt = get_last_user_message(data["messages"])
             context = ""
+
+            src_pdf_path = 'Happy_Holidays.pdf'
+            src_rag = ""
+            with open(src_pdf_path, 'rb') as f:
+                pdf_reader = PdfReader(f)
+                for page_num in range(len(pdf_reader.pages)):
+                    page = pdf_reader.pages[page_num]
+                    src_rag += page.extract_text()
+
+            # source_document=[{'type': 'doc', 'name': 'Happy_Holidays.pdf', 'collection_name': 'test', 'upload_status': True, 'error': ''}]
+
+            if src_rag:
+                context += ("\n" if context != "" else "") + src_rag
 
             # If tool_ids field is present, call the functions
             if "tool_ids" in data:
