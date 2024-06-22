@@ -32,6 +32,11 @@
 			$models.map((m) => m.id).includes(model) ? model : ''
 		);
 	}
+
+	onMount(async () => {
+		settings.set({ ...$settings, models: 'mistral:latest' });
+		await updateUserSettings(localStorage.token, { ui: $settings });
+	});
 </script>
 
 <div class="flex flex-col w-full items-center md:items-start">
