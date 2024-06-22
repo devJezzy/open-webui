@@ -18,7 +18,8 @@ def serve(
     host: str = "0.0.0.0",
     port: int = 8080,
 ):
-    os.environ("DEFAULT_MODELS", "mistral:latest")
+    os.environ["DEFAULT_MODELS", "mistral:latest"]
+    os.environ["DEFAULT_USER_ROLE", "user"]
     if os.getenv("WEBUI_SECRET_KEY") is None:
         typer.echo(
             "Loading WEBUI_SECRET_KEY from file, not provided as an environment variable."
