@@ -5,7 +5,7 @@
 	import { flyAndScale } from '$lib/utils/transitions';
 	import { goto } from '$app/navigation';
 	import ArchiveBox from '$lib/components/icons/ArchiveBox.svelte';
-	import { showSettings, activeUserCount, USAGE_POOL } from '$lib/stores';
+	import { showSettings, activeUserCount, USAGE_POOL, user } from '$lib/stores';
 	import { fade, slide } from 'svelte/transition';
 	import Tooltip from '$lib/components/common/Tooltip.svelte';
 
@@ -140,7 +140,7 @@
 				<div class=" self-center font-medium">{$i18n.t('Sign Out')}</div>
 			</button>
 
-			{#if $activeUserCount}
+			{#if $user.role === 'admin'}
 				<hr class=" dark:border-gray-800 my-1.5 p-0" />
 
 				<Tooltip
